@@ -1,12 +1,8 @@
-Flutter News App
+| Flutter    |    News App   |
 
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+A few resources to get you started, If you're on your first flutter  project you too:
 
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[![Gitter](https://badges.gitter.im/FlutterForBeginner/community.svg)](https://gitter.im/FlutterForBeginner/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
