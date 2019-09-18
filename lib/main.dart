@@ -1,30 +1,16 @@
 import 'package:flutter/material.dart';
+import 'onboarding.dart';
 
-void main() => runApp(MyApp());
+main() {
+  runApp(NewsApp());
+}
 
-class MyApp extends StatelessWidget {
+class NewsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
+      debugShowCheckedModeBanner: false,
+      home: OnBoarding(),
     );
   }
 }

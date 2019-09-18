@@ -1,4 +1,4 @@
-#Wed Sep 18 17:44:12 WEST 2019
+#Wed Sep 18 18:42:16 WEST 2019
 base.0=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
