@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'pageModel.dart';
+import 'package:page_view_indicator/page_view_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
   @override
   _OnBoardingState createState() => _OnBoardingState();
+
 }
 
 class _OnBoardingState extends State<OnBoarding> {
+
   List<PageModel> pages;
+  ValueNotifier<int> _pageViewNotifier = ValueNotifier(0);
+
 
   void _addPages() {
     pages = List<PageModel>();
@@ -110,16 +115,16 @@ class _OnBoardingState extends State<OnBoarding> {
               );
             },
             itemCount: pages.length,
+            onPageChanged: (index){
+              _pageViewNotifier.value = index ;
+            },
           ),
         ),
         Transform.translate(
           offset: Offset(0, 175),
           child: Align(
             alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: _drawPageIndicators(),
-            ),
+            child: _displayPageIndicators(pages.length,),
           ),
         ),
         Align(
@@ -152,21 +157,23 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
-  List<Widget> _drawPageIndicators(){
-    List<Widget> _widgets = List<Widget>();
-    for(var i in pages){
-      _widgets.add(_drawCircle(Colors.red));
-    }
-    return _widgets;
-  }
-
-  Widget _drawCircle(Color color) {
-    return Container(
-      margin: EdgeInsets.only(right: 8),
-      width: 15,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
+  Widget _displayPageIndicators ( int length){
+    return PageViewIndicator(
+      pageIndexNotifier: _pageViewNotifier,
+      length: length,
+      normalBuilder: (animationController, index) => Circle(
+        size: 8.0,
+        color: Colors.grey,
+      ),
+      highlightedBuilder: (animationController, index) => ScaleTransition(
+        scale: CurvedAnimation(
+          parent: animationController,
+          curve: Curves.ease,
+        ),
+        child: Circle(
+          size: 12.0,
+          color: Colors.red,
+        ),
       ),
     );
   }
