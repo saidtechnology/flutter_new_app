@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'pageModel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../pageModel.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
+import 'home_screen.dart';
 
 class OnBoarding extends StatefulWidget {
   @override
   _OnBoardingState createState() => _OnBoardingState();
-
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-
   List<PageModel> pages;
   ValueNotifier<int> _pageViewNotifier = ValueNotifier(0);
-
 
   void _addPages() {
     pages = List<PageModel>();
@@ -115,8 +114,8 @@ class _OnBoardingState extends State<OnBoarding> {
               );
             },
             itemCount: pages.length,
-            onPageChanged: (index){
-              _pageViewNotifier.value = index ;
+            onPageChanged: (index) {
+              _pageViewNotifier.value = index;
             },
           ),
         ),
@@ -124,7 +123,9 @@ class _OnBoardingState extends State<OnBoarding> {
           offset: Offset(0, 175),
           child: Align(
             alignment: Alignment.center,
-            child: _displayPageIndicators(pages.length,),
+            child: _displayPageIndicators(
+              pages.length,
+            ),
           ),
         ),
         Align(
@@ -148,7 +149,17 @@ class _OnBoardingState extends State<OnBoarding> {
                     letterSpacing: 1,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context){
+                        _updateScreen();
+                        return HomeScreen();
+                      },
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -157,7 +168,7 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
-  Widget _displayPageIndicators ( int length){
+  Widget _displayPageIndicators(int length) {
     return PageViewIndicator(
       pageIndexNotifier: _pageViewNotifier,
       length: length,
@@ -177,4 +188,12 @@ class _OnBoardingState extends State<OnBoarding> {
       ),
     );
   }
+
+  void _updateScreen() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('seen' , true);
+  }
+
 }
+
+

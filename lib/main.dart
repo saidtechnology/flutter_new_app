@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
-import 'onboarding.dart';
+import 'package:news_app/screens/home_screen.dart';
+import 'screens/onboarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-main() {
-  runApp(NewsApp());
+main() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+   bool seen = prefs.getBool('seen');
+   Widget _screen ;
+   if( seen == null || seen == false ){
+     _screen = OnBoarding();
+    }else{
+     _screen = HomeScreen();
+   }
+  runApp(NewsApp( _screen ));
 }
 
 class NewsApp extends StatelessWidget {
+  final Widget _screen;
+
+  NewsApp(this._screen);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnBoarding(),
+      home: this._screen,
     );
   }
 }
