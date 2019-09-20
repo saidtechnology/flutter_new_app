@@ -20,34 +20,34 @@ class _OnBoardingState extends State<OnBoarding> {
       PageModel(
         'Welcome',
         'Making friends is easy as waving your hand back and forth is easy step for Welcome.',
-        'assets/images/bd.png',
-        Icons.ac_unit,
+        'assets/images/onboarding_screen_1.jpg',
+        Icons.account_circle,
       ),
     );
     pages.add(
       PageModel(
-        'Alarm',
-        'Making friends is easy as waving your hand back and forth is easy step for Alarm.',
-        'assets/images/bd2.png',
-        Icons.access_alarm,
-      ),
-    );
-
-    pages.add(
-      PageModel(
-        'Print',
-        'Making friends is easy as waving your hand back and forth is easy step for Print.',
-        'assets/images/bd3.png',
-        Icons.print,
+        'Shopping ',
+        'Making friends is easy as waving your hand back and forth is easy step for Shop.',
+        'assets/images/onboarding_screen_2.jpg',
+        Icons.add_shopping_cart,
       ),
     );
 
     pages.add(
       PageModel(
-        'Map',
-        'Making friends is easy as waving your hand back and forth is easy step for Map.',
-        'assets/images/bd4.png',
+        'Flying',
+        'Making friends is easy as waving your hand back and forth is easy step for Fly.',
+        'assets/images/onboarding_screen_3.jpg',
         Icons.map,
+      ),
+    );
+
+    pages.add(
+      PageModel(
+        'Photos',
+        'Making friends is easy as waving your hand back and forth is easy step for Photos.',
+        'assets/images/onboarding_screen_4.jpg',
+        Icons.add_a_photo,
       ),
     );
   }
@@ -79,34 +79,39 @@ class _OnBoardingState extends State<OnBoarding> {
                       Transform.translate(
                         child: Icon(
                           pages[index].icon,
-                          size: 150,
-                          color: Colors.white,
+                          size: 80,
+                          color: Colors.lightGreenAccent,
                         ),
-                        offset: Offset(0, -100),
+                        offset: Offset(0, -250),
                       ),
-                      Text(
-                        pages[index].title,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 48,
-                          right: 48,
-                          top: 17,
-                        ),
+                      
+                      Transform.translate(
                         child: Text(
-                          pages[index].description,
+                          pages[index].title,
                           style: TextStyle(
-                            color: Colors.grey.shade600,
-                            fontSize: 16,
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
-                        ),
+                        ), offset: Offset(0 , 120),
+                      ),
+                      Transform.translate(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            left: 48,
+                            right: 48,
+                            top: 17,
+                          ),
+                          child: Text(
+                            pages[index].description,
+                            style: TextStyle(
+                              color: Colors.lightGreenAccent,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ), offset: Offset(0, 120),
                       ),
                     ],
                   ),
@@ -120,7 +125,7 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
         ),
         Transform.translate(
-          offset: Offset(0, 175),
+          offset: Offset(0, 280),
           child: Align(
             alignment: Alignment.center,
             child: _displayPageIndicators(
