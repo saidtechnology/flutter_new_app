@@ -48,6 +48,7 @@ flutter:
     - assets/images/onboarding_screen_2.jpg
     - assets/images/onboarding_screen_3.jpg
     - assets/images/onboarding_screen_4.jpg
+    - assets/images/placeholder_bg.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

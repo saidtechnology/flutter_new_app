@@ -1,20 +1,21 @@
 #Internal package file, do not edit.
-#Fri Sep 20 15:11:30 WEST 2019
+#Fri Sep 20 21:08:41 WEST 2019
 4.path=flutter_assets/kernel_blob.bin
 13.baseType=DIRECTORY
 8.set=DEX
 6.path=flutter_assets/vm_snapshot_data
 0.baseType=DIRECTORY
-10.path=flutter_assets/fonts/MaterialIcons-Regular.ttf
+10.path=flutter_assets/assets/images/placeholder_bg.png
 5.baseType=DIRECTORY
 1.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 8.path=classes.dex
-12.path=flutter_assets/isolate_snapshot_data
+12.path=flutter_assets/FontManifest.json
 3.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
-14.path=flutter_assets/AssetManifest.json
-15.set=NATIVE_RESOURCE
+14.path=flutter_assets/assets/images/onboarding_screen_2.jpg
+15.set=ASSET
 4.set=ASSET
 5.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
+16.path=lib/x86/libflutter.so
 7.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 11.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 9.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/transforms/mergeJniLibs/debug/0
@@ -22,7 +23,7 @@
 1.baseType=DIRECTORY
 11.set=ASSET
 0.set=ASSET
-15.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/transforms/mergeJniLibs/debug/0
+15.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 14.baseType=DIRECTORY
 6.baseType=DIRECTORY
 7.set=ASSET
@@ -38,16 +39,17 @@
 5.path=flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
 0.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 7.path=flutter_assets/assets/images/onboarding_screen_3.jpg
-11.path=flutter_assets/FontManifest.json
+11.path=flutter_assets/fonts/MaterialIcons-Regular.ttf
 9.path=lib/arm64-v8a/libflutter.so
 6.set=ASSET
 2.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/transforms/mergeJniLibs/debug/0
-13.path=flutter_assets/assets/images/onboarding_screen_2.jpg
+13.path=flutter_assets/isolate_snapshot_data
 11.baseType=DIRECTORY
 4.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
-15.path=lib/x86/libflutter.so
+15.path=flutter_assets/AssetManifest.json
 3.baseType=DIRECTORY
 6.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
+16.baseType=DIRECTORY
 10.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 13.set=ASSET
 8.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/transforms/dexMerger/debug/0
@@ -55,10 +57,12 @@
 8.baseType=DIRECTORY
 12.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 14.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
+16.base=/Users/saidtechnology/AndroidStudioProjects/Dart_Project /news_app/build/app/intermediates/transforms/mergeJniLibs/debug/0
 9.set=NATIVE_RESOURCE
-count=16
+count=17
 12.baseType=DIRECTORY
 4.baseType=DIRECTORY
+16.set=NATIVE_RESOURCE
 5.set=ASSET
 9.baseType=DIRECTORY
 0.path=flutter_assets/assets/images/onboarding_screen_4.jpg

@@ -10,6 +10,7 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
+
   List<PageModel> pages;
   ValueNotifier<int> _pageViewNotifier = ValueNotifier(0);
 

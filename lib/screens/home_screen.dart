@@ -38,9 +38,9 @@ class _HomeScreenState extends State<HomeScreen>
         bottom: TabBar(
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            WhatsNew(),
-            Popular(),
-            Favourites(),
+            Tab(text: "WHAT'S NEW",),
+            Tab(text: "POPULAR"),
+            Tab(text: "FAVOURITES",),
           ],
           controller: _tabController,
         ),
@@ -49,15 +49,9 @@ class _HomeScreenState extends State<HomeScreen>
       body: Center(
         child: TabBarView(
           children: <Widget>[
-            Container(
-              color: Colors.teal,
-            ),
-            Container(
-              color: Colors.amber,
-            ),
-            Container(
-              color: Colors.indigo,
-            ),
+            WhatsNew(),
+            Popular(),
+            Favourites(),
           ],
           controller: _tabController,
         ),

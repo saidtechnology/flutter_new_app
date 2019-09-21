@@ -8,8 +8,7 @@ class Popular extends StatefulWidget {
 class _PopularState extends State<Popular> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber,
+    return Container(color: Colors.amber,
     );
   }
 }
