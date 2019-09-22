@@ -25,21 +25,23 @@ class _FavouritesState extends State<Favourites> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-    itemBuilder: (context, position) {
-      return Card(
-        child: Container(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: <Widget>[
-              _authorRow(),
-              SizedBox( height: 16, ),
-              _newsItemRow(),
-            ],
+      itemBuilder: (context, position) {
+        return Card(
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: <Widget>[
+                _authorRow(),
+                SizedBox(
+                  height: 16,
+                ),
+                _newsItemRow(),
+              ],
+            ),
           ),
-        ),
-      );
-    },
-    itemCount: 20,
+        );
+      },
+      itemCount: 20,
     );
   }
 
@@ -77,7 +79,7 @@ class _FavouritesState extends State<Favourites> {
                     Text(
                       '15 Min .',
                       style: TextStyle(
-                        color: Colors.grey,
+                         color: Colors.grey,
                       ),
                     ),
                     Text(
@@ -112,21 +114,22 @@ class _FavouritesState extends State<Favourites> {
           ),
           width: 124,
           height: 124,
-          margin: EdgeInsets.only( right: 16 ),
+          margin: EdgeInsets.only(right: 16),
         ),
         Expanded(
           child: Column(
             children: <Widget>[
               Text(
                 'Tech Tent: Old phones and safe social',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
               Text(
                 'We also talk about the future of work as the robots advance, and we ask whether a retro phone',
-                style: TextStyle(color: Colors.grey, fontSize: 16 , height: 1.25),
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
+                  height: 1.25,
+                ),
               ),
             ],
           ),
