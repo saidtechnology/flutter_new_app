@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/screens/headline_news.dart';
 import 'package:news_app/models/nav_menu.dart';
 import 'package:news_app/screens/home_screen.dart';
+import 'package:news_app/screens/twitter_feed.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -10,18 +11,18 @@ class NavigationDrawer extends StatefulWidget {
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
   List<NavMenuItem> navigationMenu = [
-    NavMenuItem("Explore", () => HomeScreen() ),
-    NavMenuItem("Headline News", () => HeadLineNews())
-  ];
-
-  List<String> navMenu = [
-    'Explore',
-    'Headline News',
-    'Read Later',
-    'Videos',
-    'Photos',
-    'Settings',
-    'Logout'
+    NavMenuItem(
+      "Explore",
+      () => HomeScreen(),
+    ),
+    NavMenuItem(
+      "Headline News",
+      () => HeadLineNews(),
+    ),
+    NavMenuItem(
+      "Twitter Feed",
+      () => TwitterFeed(),
+    )
   ];
 
   @override
@@ -43,10 +44,15 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   color: Colors.grey.shade400,
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context){
-                    return navigationMenu[position].destination();
-
-                  },),);
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return navigationMenu[position].destination();
+                      },
+                    ),
+                  );
                 },
               ),
             );
