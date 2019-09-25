@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:news_app/shared_ui/navigation_drawer.dart';
 import 'home_tabs/favourites.dart';
 import 'home_tabs/popular.dart';
-import 'home_tabs/whats_new.dart';
 
 class HeadLineNews extends StatefulWidget {
   @override

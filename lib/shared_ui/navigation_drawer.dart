@@ -3,6 +3,7 @@ import 'package:news_app/screens/headline_news.dart';
 import 'package:news_app/models/nav_menu.dart';
 import 'package:news_app/screens/home_screen.dart';
 import 'package:news_app/screens/twitter_feed.dart';
+import 'package:news_app/screens/facebook_feed.dart';
 
 class NavigationDrawer extends StatefulWidget {
   @override
@@ -20,9 +21,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       () => HeadLineNews(),
     ),
     NavMenuItem(
-      "Twitter Feed",
+      "Twitter Feeds",
       () => TwitterFeed(),
-    )
+    ),
+    NavMenuItem(
+      'Facebook Feeds',
+      () => FacebookFeeds(),
+    ),
   ];
 
   @override
