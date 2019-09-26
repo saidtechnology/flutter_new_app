@@ -9,7 +9,15 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+enum PopOutMenu {
+  HELP,
+  ABOUT,
+  CONTACT,
+  SETTINGS,
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
 
   @override
@@ -35,17 +43,18 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             icon: Icon(Icons.search),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Icon(Icons.more_vert),
-            onPressed: () {},
-          ),
+          _popOutMenu(context),
         ],
         bottom: TabBar(
           indicatorColor: Colors.white,
           tabs: <Widget>[
-            Tab(text: "WHAT'S NEW",),
+            Tab(
+              text: "WHAT'S NEW",
+            ),
             Tab(text: "POPULAR"),
-            Tab(text: "FAVOURITES",),
+            Tab(
+              text: "FAVOURITES",
+            ),
           ],
           controller: _tabController,
         ),
@@ -61,6 +70,32 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           controller: _tabController,
         ),
       ),
+    );
+  }
+
+  Widget _popOutMenu(BuildContext context) {
+    return PopupMenuButton<PopOutMenu>(
+      icon: Icon(Icons.more_vert),
+      itemBuilder: (context) {
+        return [
+          PopupMenuItem(
+            value: PopOutMenu.ABOUT,
+            child: Text('ABOUT'),
+          ),
+          PopupMenuItem(
+            value: PopOutMenu.HELP,
+            child: Text('HELP'),
+          ),
+          PopupMenuItem(
+            value: PopOutMenu.CONTACT,
+            child: Text('CONTACT'),
+          ),
+          PopupMenuItem(
+            value: PopOutMenu.SETTINGS,
+            child: Text('SETTINGS'),
+          ),
+        ];
+      },
     );
   }
 }
