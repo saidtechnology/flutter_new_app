@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/api/authors_api.dart';
 import 'package:news_app/shared_ui/navigation_drawer.dart';
 import 'home_tabs/whats_new.dart';
 import 'home_tabs/popular.dart';
 import 'home_tabs/favourites.dart';
+import 'package:news_app/api/authors_api.dart ';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -20,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
+  AuthorsApi authorsApi = AuthorsApi();
+
   @override
   void initState() {
     super.initState();
@@ -34,6 +38,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    authorsApi.fetchAllAuthors();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Explore'),
