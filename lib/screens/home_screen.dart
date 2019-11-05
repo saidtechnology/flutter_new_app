@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
 
-  AuthorsApi authorsApi = AuthorsApi();
+  AuthorsAPI authorsApi = AuthorsAPI();
 
   @override
   void initState() {
