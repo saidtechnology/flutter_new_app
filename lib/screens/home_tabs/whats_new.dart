@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:news_app/api/posts_api.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:news_app/models/post.dart';
@@ -34,8 +35,14 @@ class _WhatsNewState extends State<WhatsNew> {
     );
 
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.25,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      height: MediaQuery
+          .of(context)
+          .size
+          .height * 0.25,
       decoration: BoxDecoration(
         image: DecorationImage(
           image: ExactAssetImage('assets/images/placeholder_bg.png'),
@@ -85,48 +92,10 @@ class _WhatsNewState extends State<WhatsNew> {
             padding: EdgeInsets.all(8.0),
             child: Card(
               child: FutureBuilder(
-                future: postsAPI.fetchWhatsNew(),
-                builder: (context, AsyncSnapshot snapShot) {
-
-                  switch (snapShot.connectionState){
-                    case ConnectionState.waiting:
-                      return _loading();
-                      break;
-                    case ConnectionState.active:
-                      return _loading();
-                      break;
-                    case ConnectionState.none:
-                      return _connectionError();
-                      break;
-                    case ConnectionState.done:
-                      if( snapShot.error != null ){
-                        return _error(snapShot.error);
-                      }else{
-                        if( snapShot.hasData ){
-                          List<Post> posts = snapShot.data;
-                          if ( posts.length >= 3){
-                            Post post1 = snapShot.data[0];
-                            Post post2 = snapShot.data[1];
-                            Post post3 = snapShot.data[2];
-                            return Column(
-                              children: <Widget>[
-                                _drawSingleRow(post1),
-                                _drawDivider(),
-                                _drawSingleRow(post2),
-                                _drawDivider(),
-                                _drawSingleRow(post3),
-                              ],
-                            );
-                          }else{
-                            return _noData();
-                          }
-                        }else{
-                          return _noData();
-                        }
-                      }
-                      break;
+                  future: postsAPI.fetchWhatsNew(),
+                  builder: (context, AsyncSnapshot snapShot) {
+                    return _dataGetter(snapShot);
                   }
-                },
               ),
             ),
           ),
@@ -135,22 +104,15 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
+
   Widget _drawRecentUpdates() {
     return Padding(
       padding: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 16, bottom: 8, top: 8),
-            child: _drawSectionTitle('Recent Updates'),
-          ),
-          _drawRecentUpdatesCard(Colors.deepOrange),
-          _drawRecentUpdatesCard(Colors.teal),
-          SizedBox(
-            height: 48,
-          ),
-        ],
+      child: FutureBuilder(
+        future: postsAPI.fetchRecentUpdates(),
+        builder: (context, AsyncSnapshot snapShot) {
+          return _dataUpdater(snapShot);
+        },
       ),
     );
   }
@@ -184,7 +146,7 @@ class _WhatsNewState extends State<WhatsNew> {
             child: Column(
               children: <Widget>[
                 Text(
-                  post.title  ,
+                  post.title,
                   maxLines: 2,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
@@ -198,7 +160,7 @@ class _WhatsNewState extends State<WhatsNew> {
                     Row(
                       children: <Widget>[
                         Icon(Icons.timer),
-                        Text(_parseHumanDateTime( post.dateWritten)),
+                        Text(_parseHumanDateTime(post.dateWritten)),
                       ],
                     ),
                   ],
@@ -211,7 +173,7 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
-   String _parseHumanDateTime(String dateTime){
+  String _parseHumanDateTime(String dateTime) {
     Duration timeAgo = DateTime.now().difference(DateTime.parse(dateTime));
     DateTime theDifference = DateTime.now().subtract(timeAgo);
     return timeago.format(theDifference);
@@ -227,7 +189,7 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
-  Widget _drawRecentUpdatesCard(Color color) {
+  Widget _drawRecentUpdatesCard(Color color , Post post) {
     return Card(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -235,12 +197,15 @@ class _WhatsNewState extends State<WhatsNew> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: ExactAssetImage('assets/images/placeholder_bg.png'),
+                image: NetworkImage(post.featuredImage, ),
                 fit: BoxFit.cover,
               ),
             ),
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.25,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.25,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 16, left: 16),
@@ -262,7 +227,7 @@ class _WhatsNewState extends State<WhatsNew> {
           Padding(
             padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
             child: Text(
-              'Vettel is Ferrari Number One - Hamilton',
+              post.title,
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
             ),
           ),
@@ -279,7 +244,7 @@ class _WhatsNewState extends State<WhatsNew> {
                   width: 4,
                 ),
                 Text(
-                  '15 Min',
+                  _parseHumanDateTime(post.dateWritten),
                   style: TextStyle(color: Colors.grey, fontSize: 14),
                 ),
               ],
@@ -290,34 +255,113 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
-   Widget _loading() {
+  Widget _dataUpdater(AsyncSnapshot snapShot ) {
+
+    switch (snapShot.connectionState) {
+      case ConnectionState.waiting:
+        return _loading();
+        break;
+      case ConnectionState.active:
+        return _loading();
+        break;
+      case ConnectionState.none:
+        return _connectionError();
+        break;
+      case ConnectionState.done:
+        if (snapShot.hasError) {
+          return _error(snapShot.error);
+        } else {
+          Post post1 = snapShot.data[0];
+          Post post2 = snapShot.data[1];
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, bottom: 8, top: 8),
+                child: _drawSectionTitle('Recent Updates'),
+              ),
+              _drawRecentUpdatesCard(Colors.deepOrange , post1),
+              _drawRecentUpdatesCard(Colors.teal, post2),
+              SizedBox(
+                height: 48,
+              ),
+            ],
+          );
+        }
+        break;
+    }
+  }
+
+  Widget _dataGetter(AsyncSnapshot snapShot) {
+    switch (snapShot.connectionState) {
+      case ConnectionState.waiting:
+        return _loading();
+        break;
+      case ConnectionState.active:
+        return _loading();
+        break;
+      case ConnectionState.none:
+        return _connectionError();
+        break;
+      case ConnectionState.done:
+        if (snapShot.error != null) {
+          return _error(snapShot.error);
+        } else {
+          if (snapShot.hasData) {
+            List<Post> posts = snapShot.data;
+            if (posts.length >= 3) {
+              Post post1 = snapShot.data[0];
+              Post post2 = snapShot.data[1];
+              Post post3 = snapShot.data[2];
+              return Column(
+                children: <Widget>[
+                  _drawSingleRow(post1),
+                  _drawDivider(),
+                  _drawSingleRow(post2),
+                  _drawDivider(),
+                  _drawSingleRow(post3),
+                ],
+              );
+            } else {
+              return _noData();
+            }
+          } else {
+            return _noData();
+          }
+        }
+        break;
+    }
+  }
+
+  Widget _loading() {
     return Container(
       padding: EdgeInsets.only(top: 16, bottom: 16),
       child: Center(
         child: CircularProgressIndicator(),
       ),
     );
-   }
+  }
 
-   Widget _connectionError(){
-     return Container(
-       padding: EdgeInsets.all(16),
-       child: Text('Connection Error !!!!'),
-     );
-   }
+  Widget _connectionError() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text('Connection Error !!!!'),
+    );
+  }
 
-   Widget _error(var error){
-     return Container(
-       padding: EdgeInsets.all(16),
-       child: Text( error.toString()),
-     );
-   }
+  Widget _error(var error) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(error.toString()),
+    );
+  }
 
-   Widget _noData(){
+  Widget _noData() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Text('No Data Available!'),
     );
-   }
-}
+  }
 
+}
