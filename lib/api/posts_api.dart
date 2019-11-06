@@ -28,6 +28,7 @@ class PostsAPI {
         );
         posts.add(post);
       }
+      return posts;
     }
   }
 }

@@ -4,7 +4,6 @@ import 'package:news_app/shared_ui/navigation_drawer.dart';
 import 'home_tabs/whats_new.dart';
 import 'home_tabs/popular.dart';
 import 'home_tabs/favourites.dart';
-import 'package:news_app/api/authors_api.dart ';
 
 class HomeScreen extends StatefulWidget {
   @override

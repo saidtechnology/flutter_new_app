@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/api/posts_api.dart';
-import 'dart:async';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:news_app/models/post.dart';
 
