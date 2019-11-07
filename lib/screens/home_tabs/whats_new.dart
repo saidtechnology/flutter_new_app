@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:news_app/api/posts_api.dart';
 import 'package:news_app/models/post.dart';
@@ -26,54 +27,11 @@ class _WhatsNewState extends State<WhatsNew> {
   }
 
   Widget _drawHeader() {
-    TextStyle _headerTitle = TextStyle(
-        color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600);
-    TextStyle _headerDescription = TextStyle(
-      color: Colors.white,
-      fontSize: 18,
-    );
-
-    return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
-      height: MediaQuery
-          .of(context)
-          .size
-          .height * 0.25,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: ExactAssetImage('assets/images/placeholder_bg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 48, right: 48),
-              child: Text(
-                'How Terriers & Royals Gatecrashed Final',
-                style: _headerTitle,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 34, right: 34),
-              child: Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.',
-                style: _headerDescription,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return FutureBuilder(
+      future: postsAPI.fetchPostsByCategoryId("1"),
+      builder: (context, AsyncSnapshot snapShot){
+        return _dataDrawHeader(snapShot);
+      },
     );
   }
 
@@ -93,7 +51,7 @@ class _WhatsNewState extends State<WhatsNew> {
               child: FutureBuilder(
                   future: postsAPI.fetchPostsByCategoryId("2"),
                   builder: (context, AsyncSnapshot snapShot) {
-                    return _dataGetter(snapShot);
+                    return _dataDrawSingleRow(snapShot);
                   }
               ),
             ),
@@ -110,7 +68,7 @@ class _WhatsNewState extends State<WhatsNew> {
       child: FutureBuilder(
         future: postsAPI.fetchPostsByCategoryId("3"),
         builder: (context, AsyncSnapshot snapShot) {
-          return _dataUpdater(snapShot);
+          return _dataDrawRecentUpdatesCard(snapShot);
         },
       ),
     );
@@ -248,8 +206,7 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
-  Widget _dataUpdater(AsyncSnapshot snapShot ) {
-
+  Widget _dataDrawRecentUpdatesCard(AsyncSnapshot snapShot ) {
     switch (snapShot.connectionState) {
       case ConnectionState.waiting:
         return loading();
@@ -286,7 +243,7 @@ class _WhatsNewState extends State<WhatsNew> {
     }
   }
 
-  Widget _dataGetter(AsyncSnapshot snapShot) {
+  Widget _dataDrawSingleRow(AsyncSnapshot snapShot) {
     switch (snapShot.connectionState) {
       case ConnectionState.waiting:
         return loading();
@@ -326,4 +283,73 @@ class _WhatsNewState extends State<WhatsNew> {
         break;
     }
   }
+
+  Widget _dataDrawHeader(AsyncSnapshot snapShot){
+    switch (snapShot.connectionState) {
+      case ConnectionState.waiting:
+        return loading();
+        break;
+      case ConnectionState.active:
+        return loading();
+        break;
+      case ConnectionState.none:
+        return connectionError();
+        break;
+      case ConnectionState.done:
+        if (snapShot.hasError) {
+          return error(snapShot.error);
+          // ignore: missing_return
+        } else {
+          List<Post> posts = snapShot.data;
+          Random random = Random();
+          int randomIndex = random.nextInt(posts.length);
+          Post post = posts[randomIndex];
+          return Container (
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.25,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(post.featuredImage),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Center(
+
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 48, right: 48),
+                    child: Text(
+                      post.title,
+                      style: headerTitle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 34, right: 34),
+                    child: Text(
+                      post.content.substring(0 , 50),
+                      style: headerDescription,
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+        break;
+    }
+  }
+
 }

@@ -36,3 +36,10 @@ String parseHumanDateTime(String dateTime) {
   DateTime theDifference = DateTime.now().subtract(timeAgo);
   return timeago.format(theDifference);
 }
+
+TextStyle headerTitle = TextStyle(
+    color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600);
+TextStyle headerDescription = TextStyle(
+  color: Colors.white,
+  fontSize: 18,
+);
