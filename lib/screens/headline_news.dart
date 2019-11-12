@@ -11,6 +11,7 @@ class HeadLineNews extends StatefulWidget {
 class _HeadLineNewsState extends State<HeadLineNews> with SingleTickerProviderStateMixin {
   TabController _tabController;
 
+
   @override
   void initState() {
     super.initState();

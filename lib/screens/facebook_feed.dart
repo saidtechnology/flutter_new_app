@@ -8,6 +8,16 @@ class FacebookFeeds extends StatefulWidget {
 }
 
 class _FacebookFeedsState extends State<FacebookFeeds> {
+  List<int> ids1 = List<int>();
+  List<int> ids2 = List<int>();
+
+  @override
+  void initState() {
+    super.initState();
+    ids1 = [ 0 , 3 , 5 ];
+    ids2 = [ 0 , 1 , 7 ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +41,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
                 child: Card(
                   child: Column(
                     children: <Widget>[
-                      _headerDrawer(),
+                      _headerDrawer(position , ids1),
                       _bodyFirstDrawer(),
                       _footerDrawer('10 COMMENTS'),
                     ],
@@ -41,7 +51,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
               Card(
                 child: Column(
                   children: <Widget>[
-                    _headerDrawer(),
+                    _headerDrawer(position , ids2),
                     _bodySecondDrawer(),
                     _footerDrawer('12 COMMENTS'),
                   ],
@@ -55,7 +65,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
     );
   }
 
-  Widget _headerDrawer() {
+  Widget _headerDrawer(int position , List idsList) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -109,9 +119,18 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
           ),
           Row(
             children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: Colors.grey.shade400,
+              IconButton(
+                icon:Icon(Icons.favorite),
+                color: (idsList.contains(position)) ? Colors.red : Colors.grey.shade400,
+                onPressed: (){
+                  setState(() {
+                    if (idsList.contains(position)){
+                      idsList.remove(position);
+                    }else{
+                      idsList.add(position);
+                    }
+                  });
+                },
               ),
               Text(
                 '25',
@@ -125,6 +144,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
       ),
     );
   }
+
   Widget _bodyFirstDrawer() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -169,6 +189,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
       ],
     );
   }
+
   Widget _bodySecondDrawer(){
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,6 +219,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
       ],
     );
   }
+
   Widget _footerDrawer(String text) {
     return Padding(
       padding: const EdgeInsets.only(

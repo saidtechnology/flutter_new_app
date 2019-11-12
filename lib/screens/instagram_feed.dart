@@ -7,6 +7,14 @@ class InstagramFeeds extends StatefulWidget {
 }
 
 class _InstagramFeedsState extends State<InstagramFeeds> {
+  List <int> ids ;
+
+  @override
+  void initState() {
+    super.initState();
+    ids = [0, 3, 7];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +37,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
             child: Card(
               child: Column(
                 children: <Widget>[
-                  _headerDrawer(),
+                  _headerDrawer(position),
                   _bodyDrawer(),
                   _footerDrawer(),
                 ],
@@ -42,7 +50,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
     );
   }
 
-  Widget _headerDrawer() {
+  Widget _headerDrawer(int position) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -96,9 +104,19 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
           ),
           Row(
             children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: Colors.grey.shade400,
+              IconButton(
+                icon: Icon(Icons.favorite), 
+                onPressed: (){
+                  if(ids.contains(position)){
+                    ids.remove(position);
+                  }else{
+                    ids.add(position);
+                  }
+                  setState(() {
+
+                  });
+                },
+                color:(ids.contains(position))? Colors.red : Colors.grey.shade400,
               ),
               Text(
                 '25',
@@ -108,6 +126,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
               ),
             ],
           )
+
         ],
       ),
     );

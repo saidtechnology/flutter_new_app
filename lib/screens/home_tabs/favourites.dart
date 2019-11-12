@@ -7,6 +7,8 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
+  List<int> ids = [0, 1, 5];
+
   List<Color> colorsList = [
     Colors.red,
     Colors.teal,
@@ -22,6 +24,7 @@ class _FavouritesState extends State<Favourites> {
     return colorsList[random.nextInt(colorsList.length)];
   }
 
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -31,7 +34,7 @@ class _FavouritesState extends State<Favourites> {
             padding: EdgeInsets.all(16),
             child: Column(
               children: <Widget>[
-                _authorRow(),
+                _authorRow(position),
                 SizedBox(
                   height: 16,
                 ),
@@ -45,7 +48,7 @@ class _FavouritesState extends State<Favourites> {
     );
   }
 
-  Widget _authorRow() {
+  Widget _authorRow( int position ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -95,9 +98,17 @@ class _FavouritesState extends State<Favourites> {
           ],
         ),
         IconButton(
-          icon: Icon(Icons.bookmark_border),
-          onPressed: () {},
-          color: Colors.grey,
+          icon: (ids.contains(position)) ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
+          color: (ids.contains(position)) ? Colors.red : Colors.grey,
+          onPressed: () {
+            setState(() {
+              if(ids.contains(position)){
+                ids.remove(position);
+              }else{
+                ids.add(position);
+              }
+            });
+          },
         ),
       ],
     );
