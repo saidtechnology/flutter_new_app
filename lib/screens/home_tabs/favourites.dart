@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:news_app/api/posts_api.dart';
 import 'package:news_app/models/post.dart';
+import 'package:news_app/screens/single_post.dart';
 import 'package:news_app/utilities/data_utilities.dart';
 
 class Favourites extends StatefulWidget {
@@ -56,17 +57,26 @@ class _FavouritesState extends State<Favourites> {
           List<Post> posts = snapshot.data;
           return ListView.builder(
             itemBuilder: (context, position) {
-              return Card(
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    children: <Widget>[
-                      _authorRow(position, posts[position]),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      _newsItemRow(posts[position]),
-                    ],
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context){
+                      return SinglePost(posts[position]);
+                    },
+                  ),);
+                },
+                child: Card(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: <Widget>[
+                        _authorRow(position, posts[position]),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        _newsItemRow(posts[position]),
+                      ],
+                    ),
                   ),
                 ),
               );
