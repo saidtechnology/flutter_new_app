@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:news_app/models/post.dart';
 import 'package:news_app/utilities/api_utilities.dart';
+import 'dart:async';
 
 class PostsAPI {
 

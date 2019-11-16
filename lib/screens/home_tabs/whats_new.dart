@@ -27,206 +27,13 @@ class _WhatsNewState extends State<WhatsNew> {
     );
   }
 
+  /// Group 1 : Draw Header Package.
   Widget _drawHeader() {
     return FutureBuilder(
       future: postsAPI.fetchPostsByCategoryId("1"),
       builder: (context, AsyncSnapshot snapShot) {
         return _dataDrawHeader(snapShot);
       },
-    );
-  }
-
-  Widget _drawTopStories() {
-    return Container(
-      color: Colors.grey.shade100,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              top: 16,
-            ),
-            child: _drawSectionTitle(
-              'Top Stories',
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Card(
-              child: FutureBuilder(
-                future: postsAPI.fetchPostsByCategoryId("2"),
-                builder: (context, AsyncSnapshot snapShot) {
-                  return _dataDrawSingleRow(snapShot);
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _drawRecentUpdates() {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: FutureBuilder(
-        future: postsAPI.fetchPostsByCategoryId("3"),
-        builder: (context, AsyncSnapshot snapShot) {
-          return _dataDrawRecentUpdatesCard(snapShot);
-        },
-      ),
-    );
-  }
-
-  Widget _drawDivider() {
-    return Container(
-      color: Colors.teal,
-      height: 1,
-      width: double.infinity,
-    );
-  }
-
-  Widget _drawSingleRow(Post post) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return SinglePost(post);
-            },
-          ),
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            SizedBox(
-              child: Image.network(
-                post.featuredImage,
-                fit: BoxFit.cover,
-              ),
-              width: 124,
-              height: 124,
-            ),
-            SizedBox(
-              width: 16,
-            ),
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    post.title,
-                    maxLines: 2,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(
-                    height: 18,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('Michael Adams'),
-                      Row(
-                        children: <Widget>[
-                          Icon(Icons.timer),
-                          Text(parseHumanDateTime(post.dateWritten)),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _drawSectionTitle(String title) {
-    return Text(
-      title,
-      style: TextStyle(
-        color: Colors.grey.shade700,
-        fontWeight: FontWeight.w600,
-        fontSize: 16,
-      ),
-    );
-  }
-
-  Widget _drawRecentUpdatesCard(Color color, Post post) {
-    return Card(
-      child: GestureDetector(
-        onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context){
-            return SinglePost(post);
-          },),);
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                    post.featuredImage,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.25,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16, left: 16),
-              child: Container(
-                padding: EdgeInsets.only(left: 24, right: 24, top: 2, bottom: 2),
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  'SPORT',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
-              child: Text(
-                post.title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 16),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.timer,
-                    color: Colors.grey,
-                    size: 18,
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    parseHumanDateTime(post.dateWritten),
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -304,41 +111,45 @@ class _WhatsNewState extends State<WhatsNew> {
     }
   }
 
-  Widget _dataDrawRecentUpdatesCard(AsyncSnapshot snapShot) {
-    switch (snapShot.connectionState) {
-      case ConnectionState.waiting:
-        return loading();
-        break;
-      case ConnectionState.active:
-        return loading();
-        break;
-      case ConnectionState.none:
-        return connectionError();
-        break;
-      case ConnectionState.done:
-        if (snapShot.hasError) {
-          return error(snapShot.error);
-        } else {
-          Post post1 = snapShot.data[0];
-          Post post2 = snapShot.data[1];
+  /// Group 2 : Draw Top Stories Package.
+  Widget _drawTopStories() {
+    return Container(
+      color: Colors.grey.shade100,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              top: 16,
+            ),
+            child: _drawSectionTitle('Top Stories'),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Card(
+              child: FutureBuilder(
+                future: postsAPI.fetchPostsByCategoryId("2"),
+                builder: (context, AsyncSnapshot snapShot) {
+                  return _dataDrawSingleRow(snapShot);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 8, top: 8),
-                child: _drawSectionTitle('Recent Updates'),
-              ),
-              _drawRecentUpdatesCard(Colors.deepOrange, post1),
-              _drawRecentUpdatesCard(Colors.teal, post2),
-              SizedBox(
-                height: 48,
-              ),
-            ],
-          );
-        }
-        break;
-    }
+  Widget _drawSectionTitle(String title) {
+    return Text(
+      title,
+      style: TextStyle(
+        color: Colors.grey.shade700,
+        fontWeight: FontWeight.w600,
+        fontSize: 16,
+      ),
+    );
   }
 
   Widget _dataDrawSingleRow(AsyncSnapshot snapShot) {
@@ -380,5 +191,202 @@ class _WhatsNewState extends State<WhatsNew> {
         }
         break;
     }
+  }
+
+  Widget _drawSingleRow(Post post) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return SinglePost(post);
+            },
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            SizedBox(
+              child: Image.network(
+                post.featuredImage,
+                fit: BoxFit.cover,
+              ),
+              width: 124,
+              height: 124,
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    post.title,
+                    maxLines: 2,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  SizedBox(
+                    height: 18,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text('Michael Adams'),
+                      Row(
+                        children: <Widget>[
+                          Icon(Icons.timer),
+                          Text(parseHumanDateTime(post.dateWritten)),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _drawDivider() {
+    return Container(
+      color: Colors.teal,
+      height: 1,
+      width: double.infinity,
+    );
+  }
+
+  /// Group 3 : Draw Recent Updates.
+  Widget _drawRecentUpdates() {
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: FutureBuilder(
+        future: postsAPI.fetchPostsByCategoryId("3"),
+        builder: (context, AsyncSnapshot snapShot) {
+          return _dataDrawRecentUpdatesCard(snapShot);
+        },
+      ),
+    );
+  }
+
+  Widget _dataDrawRecentUpdatesCard(AsyncSnapshot snapShot) {
+    switch (snapShot.connectionState) {
+      case ConnectionState.waiting:
+        return loading();
+        break;
+      case ConnectionState.active:
+        return loading();
+        break;
+      case ConnectionState.none:
+        return connectionError();
+        break;
+      case ConnectionState.done:
+        if (snapShot.hasError) {
+          return error(snapShot.error);
+        } else {
+          Post post1 = snapShot.data[0];
+          Post post2 = snapShot.data[1];
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 16, bottom: 8, top: 8),
+                child: _drawSectionTitle('Recent Updates'),
+              ),
+              _drawRecentUpdatesCard(Colors.deepOrange, post1),
+              _drawRecentUpdatesCard(Colors.teal, post2),
+              SizedBox(
+                height: 48,
+              ),
+            ],
+          );
+        }
+        break;
+    }
+  }
+
+  /// Call Draw Section Title.
+  Widget _drawRecentUpdatesCard(Color color, Post post) {
+    return Card(
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return SinglePost(post);
+              },
+            ),
+          );
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                    post.featuredImage,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              width: double.infinity,
+              height: MediaQuery.of(context).size.height * 0.25,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, left: 16),
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: 24, right: 24, top: 2, bottom: 2),
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  'SPORT',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+              child: Text(
+                post.title,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 16),
+              child: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.timer,
+                    color: Colors.grey,
+                    size: 18,
+                  ),
+                  SizedBox(
+                    width: 4,
+                  ),
+                  Text(
+                    parseHumanDateTime(post.dateWritten),
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

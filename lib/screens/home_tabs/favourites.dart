@@ -1,5 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:news_app/api/posts_api.dart';
+import 'package:news_app/models/post.dart';
+import 'package:news_app/utilities/data_utilities.dart';
 
 class Favourites extends StatefulWidget {
   @override
@@ -7,6 +10,7 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
+  PostsAPI postsAPI = PostsAPI();
   List<int> ids = [0, 1, 5];
 
   List<Color> colorsList = [
@@ -24,31 +28,57 @@ class _FavouritesState extends State<Favourites> {
     return colorsList[random.nextInt(colorsList.length)];
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, position) {
-        return Card(
-          child: Container(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: <Widget>[
-                _authorRow(position),
-                SizedBox(
-                  height: 16,
-                ),
-                _newsItemRow(),
-              ],
-            ),
-          ),
-        );
+    return FutureBuilder(
+      future: postsAPI.fetchPostsByCategoryId("1"),
+      builder: (context, AsyncSnapshot snapshot) {
+        return _favouritesCart(snapshot);
       },
-      itemCount: 20,
     );
   }
 
-  Widget _authorRow( int position ) {
+  Widget _favouritesCart(AsyncSnapshot snapshot) {
+    switch (snapshot.connectionState) {
+      case ConnectionState.waiting:
+        return loading();
+        break;
+      case ConnectionState.active:
+        return loading();
+        break;
+      case ConnectionState.none:
+        return connectionError();
+        break;
+      case ConnectionState.done:
+        if (snapshot.hasError) {
+          return error(snapshot.error);
+        } else {
+          List<Post> posts = snapshot.data;
+          return ListView.builder(
+            itemBuilder: (context, position) {
+              return Card(
+                child: Container(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: <Widget>[
+                      _authorRow(position, posts[position]),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      _newsItemRow(posts[position]),
+                    ],
+                  ),
+                ),
+              );
+            },
+            itemCount: posts.length,
+          );
+        }
+        break;
+    }
+  }
+
+  Widget _authorRow(int position, Post post) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -57,8 +87,7 @@ class _FavouritesState extends State<Favourites> {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: ExactAssetImage('assets/images/placeholder_bg.png'),
-                    fit: BoxFit.cover),
+                    image: NetworkImage(post.featuredImage), fit: BoxFit.cover),
                 shape: BoxShape.circle,
               ),
               width: 50,
@@ -80,13 +109,13 @@ class _FavouritesState extends State<Favourites> {
                 Row(
                   children: <Widget>[
                     Text(
-                      '15 Min .',
+                      parseHumanDateTime(post.dateWritten),
                       style: TextStyle(
-                         color: Colors.grey,
+                        color: Colors.grey,
                       ),
                     ),
                     Text(
-                      'Life Style',
+                      ' User Id : ' + post.id,
                       style: TextStyle(
                         color: _getRandomColor(),
                       ),
@@ -98,13 +127,15 @@ class _FavouritesState extends State<Favourites> {
           ],
         ),
         IconButton(
-          icon: (ids.contains(position)) ? Icon(Icons.bookmark) : Icon(Icons.bookmark_border),
+          icon: (ids.contains(position))
+              ? Icon(Icons.bookmark)
+              : Icon(Icons.bookmark_border),
           color: (ids.contains(position)) ? Colors.red : Colors.grey,
           onPressed: () {
             setState(() {
-              if(ids.contains(position)){
+              if (ids.contains(position)) {
                 ids.remove(position);
-              }else{
+              } else {
                 ids.add(position);
               }
             });
@@ -114,14 +145,13 @@ class _FavouritesState extends State<Favourites> {
     );
   }
 
-  Widget _newsItemRow() {
+  Widget _newsItemRow(Post post) {
     return Row(
       children: <Widget>[
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: ExactAssetImage('assets/images/placeholder_bg.png'),
-                fit: BoxFit.cover),
+                image: NetworkImage(post.featuredImage), fit: BoxFit.cover),
           ),
           width: 124,
           height: 124,
@@ -131,11 +161,16 @@ class _FavouritesState extends State<Favourites> {
           child: Column(
             children: <Widget>[
               Text(
-                'Tech Tent: Old phones and safe social',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                post.title,
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Text(
-                'We also talk about the future of work as the robots advance, and we ask whether a retro phone',
+                post.content,
+                maxLines: 4,
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 16,

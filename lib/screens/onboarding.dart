@@ -126,13 +126,13 @@ class _OnBoardingState extends State<OnBoarding> {
           ),
         ),
         Transform.translate(
-          offset: Offset(0, 280),
           child: Align(
             alignment: Alignment.center,
             child: _displayPageIndicators(
               pages.length,
             ),
           ),
+          offset: Offset(0, 280),
         ),
         Align(
           alignment: Alignment.bottomCenter,

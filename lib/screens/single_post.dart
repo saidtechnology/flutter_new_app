@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:news_app/models/post.dart';
 
+
 class SinglePost extends StatefulWidget {
   Post post;
 
