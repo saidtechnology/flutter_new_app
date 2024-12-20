@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pageModel.dart';
-import 'package:page_view_indicator/page_view_indicator.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'home_screen.dart';
 
 class OnBoarding extends StatefulWidget {
@@ -10,9 +10,9 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-
   List<PageModel> pages;
-  ValueNotifier<int> _pageViewNotifier = ValueNotifier(0);
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
 
   void _addPages() {
     pages = List<PageModel>();
@@ -56,10 +56,11 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     _addPages();
-    return Stack(
-      children: <Widget>[
-        Scaffold(
-          body: PageView.builder(
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          PageView.builder(
+            controller: _pageController,
             itemBuilder: (context, index) {
               return Stack(
                 children: <Widget>[
@@ -78,41 +79,32 @@ class _OnBoardingState extends State<OnBoarding> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Transform.translate(
+                        offset: Offset(0, -100),
                         child: Icon(
                           pages[index].icon,
-                          size: 80,
-                          color: Colors.lightGreenAccent,
+                          size: 150,
+                          color: Colors.white,
                         ),
-                        offset: Offset(0, -250),
                       ),
-                      
-                      Transform.translate(
+                      Text(
+                        pages[index].title,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 32),
                         child: Text(
-                          pages[index].title,
+                          pages[index].description,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
                           ),
                           textAlign: TextAlign.center,
-                        ), offset: Offset(0 , 120),
-                      ),
-                      Transform.translate(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            left: 48,
-                            right: 48,
-                            top: 17,
-                          ),
-                          child: Text(
-                            pages[index].description,
-                            style: TextStyle(
-                              color: Colors.lightGreenAccent,
-                              fontSize: 16,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ), offset: Offset(0, 120),
+                        ),
                       ),
                     ],
                   ),
@@ -121,85 +113,69 @@ class _OnBoardingState extends State<OnBoarding> {
             },
             itemCount: pages.length,
             onPageChanged: (index) {
-              _pageViewNotifier.value = index;
+              setState(() {
+                _currentPage = index;
+              });
             },
           ),
-        ),
-        Transform.translate(
-          child: Align(
-            alignment: Alignment.center,
-            child: _displayPageIndicators(
-              pages.length,
-            ),
-          ),
-          offset: Offset(0, 280),
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: 24,
-              left: 16,
-              right: 16,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: RaisedButton(
-                color: Colors.red.shade800,
-                child: Text(
-                  'GET STARTED',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    letterSpacing: 1,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context){
-                        _updateScreen();
-                        return HomeScreen();
-                      },
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 24.0, left: 16.0, right: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SmoothPageIndicator(
+                    controller: _pageController,
+                    count: pages.length,
+                    effect: WormEffect(
+                      dotColor: Colors.grey,
+                      activeDotColor: Colors.white,
+                      dotHeight: 10,
+                      dotWidth: 10,
+                      spacing: 8,
                     ),
-                  );
-                },
+                  ),
+                  TextButton(
+                    child: Text(
+                      _currentPage == pages.length - 1 ? 'GET STARTED' : 'NEXT',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (_currentPage == pages.length - 1) {
+                        _updateSeen();
+                      } else {
+                        _pageController.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _displayPageIndicators(int length) {
-    return PageViewIndicator(
-      pageIndexNotifier: _pageViewNotifier,
-      length: length,
-      normalBuilder: (animationController, index) => Circle(
-        size: 8.0,
-        color: Colors.grey,
-      ),
-      highlightedBuilder: (animationController, index) => ScaleTransition(
-        scale: CurvedAnimation(
-          parent: animationController,
-          curve: Curves.ease,
-        ),
-        child: Circle(
-          size: 12.0,
-          color: Colors.red,
-        ),
+        ],
       ),
     );
   }
 
-  void _updateScreen() async{
+  void _updateSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('seen' , true);
+    await prefs.setBool('seen', true);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
   }
 
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 }
-
-

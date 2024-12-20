@@ -1,32 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:news_app/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 import 'screens/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'utilities/app_theme.dart';
 
-main() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool seen = prefs.getBool('seen');
-  Widget _screen;
-  if (seen == null || seen == false) {
-    _screen = OnBoarding();
-  } else {
-    _screen = HomeScreen();
-  }
-  runApp(NewsApp(_screen));
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  final prefs = await SharedPreferences.getInstance();
+  final bool seen = prefs.getBool('seen') ?? false;
+  
+  runApp(MyApp(initialScreen: seen ? const HomeScreen() : const OnBoarding()));
 }
 
-class NewsApp extends StatelessWidget {
-  final Widget _screen;
+class MyApp extends StatelessWidget {
+  final Widget initialScreen;
 
-  NewsApp(this._screen);
+  const MyApp({
+    Key? key,
+    required this.initialScreen,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'News App',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.appTheme,
-      home: this._screen,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('ar', ''),
+      ],
+      home: initialScreen,
     );
   }
 }
