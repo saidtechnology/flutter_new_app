@@ -4,7 +4,7 @@ import 'package:news_app/screens/pages/about.dart';
 import 'package:news_app/screens/pages/contact.dart';
 import 'package:news_app/screens/pages/help.dart';
 import 'package:news_app/screens/pages/settings.dart';
-import 'package:news_app/shared_ui/navigation_drawer.dart';
+import 'package:news_app/shared_ui/navigation_drawer.dart' as NavigationDrawer;
 import 'home_tabs/whats_new.dart';
 import 'home_tabs/popular.dart';
 import 'home_tabs/favourites.dart';
@@ -23,7 +23,7 @@ enum PopOutMenu {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  late TabController _tabController;
 
   AuthorsAPI authorsApi = AuthorsAPI();
 
@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
           controller: _tabController,
         ),
       ),
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawer.NavigationDrawer(),
       body: Center(
         child: TabBarView(
           children: <Widget>[

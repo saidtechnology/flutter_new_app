@@ -20,6 +20,6 @@ class AuthorsAPI {
         }
         return authors;
     }
-    return authors; 
+    return []; 
   }
 }

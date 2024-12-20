@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../shared_ui/navigation_drawer.dart';
+import '../shared_ui/navigation_drawer.dart' as NavigationDrawer;
 
 class InstagramFeeds extends StatefulWidget {
   @override
@@ -7,7 +7,7 @@ class InstagramFeeds extends StatefulWidget {
 }
 
 class _InstagramFeedsState extends State<InstagramFeeds> {
-  List <int> ids ;
+  late List <int> ids ;
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
           IconButton(icon: Icon(Icons.search), onPressed: () {}),
         ],
       ),
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawer.NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
           return Padding(
@@ -221,4 +221,6 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
       ),
     );
   }
+}
+FlatButton({required Null Function() onPressed, required Text child}) {
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/shared_ui/navigation_drawer.dart';
+import 'package:news_app/shared_ui/navigation_drawer.dart'as NavigationDrawer;
 
 class TwitterFeed extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _TwitterFeedState extends State<TwitterFeed> {
           )
         ],
       ),
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawer.NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
           return Padding(
@@ -164,4 +164,6 @@ class _TwitterFeedState extends State<TwitterFeed> {
       ],
     );
   }
+}
+FlatButton({required Null Function() onPressed, required Text child}) {
 }

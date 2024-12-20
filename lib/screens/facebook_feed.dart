@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/shared_ui/navigation_drawer.dart';
+import 'package:news_app/shared_ui/navigation_drawer.dart' as NavigationDrawer;
 
 class FacebookFeeds extends StatefulWidget {
   @override
@@ -8,8 +7,8 @@ class FacebookFeeds extends StatefulWidget {
 }
 
 class _FacebookFeedsState extends State<FacebookFeeds> {
-  List<int> ids1 = List<int>();
-  List<int> ids2 = List<int>();
+  List<int> ids1 = List<int>.empty();
+  List<int> ids2 = List<int>.empty();
 
   @override
   void initState() {
@@ -31,7 +30,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
           )
         ],
       ),
-      drawer: NavigationDrawer(),
+      drawer: NavigationDrawer.NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
           return Column(
@@ -265,3 +264,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
     );
   }
 }
+
+FlatButton({required Null Function() onPressed, required Text child}) {
+}
+

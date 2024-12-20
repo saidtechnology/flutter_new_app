@@ -11,7 +11,7 @@ Future<void> main() async {
   final prefs = await SharedPreferences.getInstance();
   final bool seen = prefs.getBool('seen') ?? false;
   
-  runApp(MyApp(initialScreen: seen ? const HomeScreen() : const OnBoarding()));
+  runApp(MyApp(initialScreen: seen ? HomeScreen() : OnBoarding()));
 }
 
 class MyApp extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as http';
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:news_app/utilities/api_utilities.dart';
 import 'package:news_app/models/category.dart';
@@ -7,9 +7,9 @@ import 'dart:async';
 class CategoriesAPI {
 
   Future<List<Category>> fetchAllCategories() async {
-    List<Category> categories = List<Category>();
+    List<Category> categories = List<Category>.empty();
     String allCategoriesApi = base_api+all_categories_api;
-    var response = await http.get(allCategoriesApi);
+    var response = await http.get(Uri.parse(allCategoriesApi));
     if(response.statusCode == 200){
       var jsondata = jsonDecode(response.body);
       var data = jsondata["data"];

@@ -154,3 +154,6 @@ class _SinglePostState extends State<SinglePost> {
     );
   }
 }
+
+FlatButton({required Null Function() onPressed, required Text child}) {
+}
