@@ -5,57 +5,54 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'home_screen.dart';
 
 class OnBoarding extends StatefulWidget {
+  OnBoarding({Key? key}) : super(key: key);
+
   @override
-  _OnBoardingState createState() => _OnBoardingState();
+  State<OnBoarding> createState() => _OnBoardingState();
 }
 
 class _OnBoardingState extends State<OnBoarding> {
-  List<PageModel> pages;
+  late final List<PageModel> pages;
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  void _addPages() {
-    pages = List<PageModel>();
+  @override
+  void initState() {
+    super.initState();
+    _addPages();
+  }
 
-    pages.add(
+  void _addPages() {
+    pages = [
       PageModel(
         'Welcome',
         'Making friends is easy as waving your hand back and forth is easy step for Welcome.',
         'assets/images/onboarding_screen_1.jpg',
         Icons.account_circle,
       ),
-    );
-    pages.add(
       PageModel(
-        'Shopping ',
+        'Shopping',
         'Making friends is easy as waving your hand back and forth is easy step for Shop.',
         'assets/images/onboarding_screen_2.jpg',
         Icons.add_shopping_cart,
       ),
-    );
-
-    pages.add(
       PageModel(
         'Flying',
         'Making friends is easy as waving your hand back and forth is easy step for Fly.',
         'assets/images/onboarding_screen_3.jpg',
         Icons.map,
       ),
-    );
-
-    pages.add(
       PageModel(
         'Photos',
         'Making friends is easy as waving your hand back and forth is easy step for Photos.',
         'assets/images/onboarding_screen_4.jpg',
         Icons.add_a_photo,
       ),
-    );
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
-    _addPages();
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -67,46 +64,61 @@ class _OnBoardingState extends State<OnBoarding> {
                   Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: ExactAssetImage(
-                          pages[index].image,
-                        ),
+                        image: AssetImage(pages[index].image),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Transform.translate(
-                        offset: Offset(0, -100),
-                        child: Icon(
-                          pages[index].icon,
-                          size: 150,
-                          color: Colors.white,
-                        ),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.3),
+                          Colors.black.withOpacity(0.5),
+                        ],
                       ),
-                      Text(
-                        pages[index].title,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Transform.translate(
+                          offset: const Offset(0, -100),
+                          child: Icon(
+                            pages[index].icon,
+                            size: 150,
+                            color: Colors.white,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                        child: Text(
-                          pages[index].description,
+                        Text(
+                          pages[index].title,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 16,
+                          ),
+                          child: Text(
+                            pages[index].description,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               );
@@ -118,10 +130,22 @@ class _OnBoardingState extends State<OnBoarding> {
               });
             },
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 24.0, left: 16.0, right: 16.0),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              padding: const EdgeInsets.all(24.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.7),
+                  ],
+                ),
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -137,13 +161,6 @@ class _OnBoardingState extends State<OnBoarding> {
                     ),
                   ),
                   TextButton(
-                    child: Text(
-                      _currentPage == pages.length - 1 ? 'GET STARTED' : 'NEXT',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
                     onPressed: () {
                       if (_currentPage == pages.length - 1) {
                         _updateSeen();
@@ -154,6 +171,20 @@ class _OnBoardingState extends State<OnBoarding> {
                         );
                       }
                     },
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
+                    child: Text(
+                      _currentPage == pages.length - 1 ? 'GET STARTED' : 'NEXT',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -164,9 +195,10 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
-  void _updateSeen() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> _updateSeen() async {
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setBool('seen', true);
+    if (!mounted) return;
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => HomeScreen()),

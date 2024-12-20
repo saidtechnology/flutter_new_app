@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http';
 import 'dart:convert';
 import 'package:news_app/utilities/api_utilities.dart';
 import 'package:news_app/models/category.dart';
@@ -19,5 +19,6 @@ class CategoriesAPI {
       }
       return categories;
     }
+    return []; // Return an empty list if the response is not successful
   }
 }

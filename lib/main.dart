@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:news_app/screens/home_screen.dart';
-import 'package:provider/provider.dart';
 import 'screens/onboarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'utilities/app_theme.dart';
