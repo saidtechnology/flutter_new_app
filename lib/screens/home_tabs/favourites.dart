@@ -43,13 +43,10 @@ class _FavouritesState extends State<Favourites> {
     switch (snapshot.connectionState) {
       case ConnectionState.waiting:
         return loading();
-        break;
       case ConnectionState.active:
         return loading();
-        break;
       case ConnectionState.none:
         return connectionError();
-        break;
       case ConnectionState.done:
         if (snapshot.hasError) {
           return error(snapshot.error);
@@ -84,7 +81,6 @@ class _FavouritesState extends State<Favourites> {
             itemCount: posts.length,
           );
         }
-        break;
     }
   }
 

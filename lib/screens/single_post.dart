@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:news_app/models/post.dart';
 
-
+@immutable
 class SinglePost extends StatefulWidget {
-  Post post;
+  final Post post;
 
-  SinglePost(this.post);
+  const SinglePost(this.post);
 
   @override
   _SinglePostState createState() => _SinglePostState();

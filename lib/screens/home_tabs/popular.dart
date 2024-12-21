@@ -26,13 +26,10 @@ class _PopularState extends State<Popular> {
     switch (snapShot.connectionState) {
       case ConnectionState.waiting:
         return loading();
-        break;
       case ConnectionState.active:
         return loading();
-        break;
       case ConnectionState.none:
         return connectionError();
-        break;
       case ConnectionState.done:
         if (snapShot.hasError) {
           return error(snapShot.error);
@@ -48,7 +45,6 @@ class _PopularState extends State<Popular> {
             itemCount: posts.length,
           );
         }
-        break;
     }
   }
 

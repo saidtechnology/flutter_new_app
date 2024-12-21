@@ -75,8 +75,8 @@ class _OnBoardingState extends State<OnBoarding> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.black.withOpacity(0.3),
-                          Colors.black.withOpacity(0.5),
+                          Color.fromRGBO(0, 0, 0, 0.3),
+                          Color.fromRGBO(0, 0, 0, 0.5),
                         ],
                       ),
                     ),
@@ -142,7 +142,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black.withOpacity(0.7),
+                    Color.fromRGBO(0, 0, 0, 0.7),
                   ],
                 ),
               ),

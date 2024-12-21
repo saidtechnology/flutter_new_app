@@ -41,13 +41,10 @@ class _WhatsNewState extends State<WhatsNew> {
     switch (snapShot.connectionState) {
       case ConnectionState.waiting:
         return loading();
-        break;
       case ConnectionState.active:
         return loading();
-        break;
       case ConnectionState.none:
         return connectionError();
-        break;
       case ConnectionState.done:
         if (snapShot.hasError) {
           return error(snapShot.error);
@@ -107,7 +104,6 @@ class _WhatsNewState extends State<WhatsNew> {
             ),
           );
         }
-        break;
     }
   }
 
@@ -156,13 +152,10 @@ class _WhatsNewState extends State<WhatsNew> {
     switch (snapShot.connectionState) {
       case ConnectionState.waiting:
         return loading();
-        break;
       case ConnectionState.active:
         return loading();
-        break;
       case ConnectionState.none:
         return connectionError();
-        break;
       case ConnectionState.done:
         if (snapShot.error != null) {
           return error(snapShot.error);
@@ -189,7 +182,6 @@ class _WhatsNewState extends State<WhatsNew> {
             return noData();
           }
         }
-        break;
     }
   }
 
@@ -278,13 +270,10 @@ class _WhatsNewState extends State<WhatsNew> {
     switch (snapShot.connectionState) {
       case ConnectionState.waiting:
         return loading();
-        break;
       case ConnectionState.active:
         return loading();
-        break;
       case ConnectionState.none:
         return connectionError();
-        break;
       case ConnectionState.done:
         if (snapShot.hasError) {
           return error(snapShot.error);
@@ -307,7 +296,6 @@ class _WhatsNewState extends State<WhatsNew> {
             ],
           );
         }
-        break;
     }
   }
 
