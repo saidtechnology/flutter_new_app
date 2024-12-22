@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app/shared_ui/navigation_drawer.dart' as NavigationDrawer;
 
 class FacebookFeeds extends StatefulWidget {
+  const FacebookFeeds({super.key});
+
   @override
   _FacebookFeedsState createState() => _FacebookFeedsState();
 }
@@ -13,19 +15,19 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
   @override
   void initState() {
     super.initState();
-    ids1 = [ 0 , 3 , 5 ];
-    ids2 = [ 0 , 1 , 7 ];
+    ids1 = [0, 3, 5];
+    ids2 = [0, 1, 7];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Facebook Feeds'),
+        title: const Text('Facebook Feeds'),
         centerTitle: false,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           )
         ],
@@ -40,7 +42,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
                 child: Card(
                   child: Column(
                     children: <Widget>[
-                      _headerDrawer(position , ids1),
+                      _headerDrawer(position, ids1),
                       _bodyFirstDrawer(),
                       _footerDrawer('10 COMMENTS'),
                     ],
@@ -50,7 +52,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
               Card(
                 child: Column(
                   children: <Widget>[
-                    _headerDrawer(position , ids2),
+                    _headerDrawer(position, ids2),
                     _bodySecondDrawer(),
                     _footerDrawer('12 COMMENTS'),
                   ],
@@ -64,7 +66,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
     );
   }
 
-  Widget _headerDrawer(int position , List idsList) {
+  Widget _headerDrawer(int position, List idsList) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
@@ -72,8 +74,8 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 10, bottom: 7),
+              const Padding(
+                padding: EdgeInsets.only(right: 10, bottom: 7),
                 child: CircleAvatar(
                   backgroundColor: Colors.deepOrange,
                   radius: 24,
@@ -89,7 +91,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
                         fontSize: 16,
                         color: Colors.grey.shade800),
                   ),
-                  Row(
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Fri, 12 May 2017 ',
@@ -98,7 +100,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
+                        padding: EdgeInsets.only(bottom: 8),
                         child: Text(
                           '. ',
                           style: TextStyle(fontSize: 18, color: Colors.grey),
@@ -119,13 +121,15 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
           Row(
             children: <Widget>[
               IconButton(
-                icon:Icon(Icons.favorite),
-                color: (idsList.contains(position)) ? Colors.red : Colors.grey.shade400,
-                onPressed: (){
+                icon: const Icon(Icons.favorite),
+                color: (idsList.contains(position))
+                    ? Colors.red
+                    : Colors.grey.shade400,
+                onPressed: () {
                   setState(() {
-                    if (idsList.contains(position)){
+                    if (idsList.contains(position)) {
                       idsList.remove(position);
-                    }else{
+                    } else {
                       idsList.add(position);
                     }
                   });
@@ -159,8 +163,8 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
+        const Padding(
+          padding: EdgeInsets.only(
             left: 16,
             right: 16,
             bottom: 16,
@@ -174,7 +178,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
           ),
         ),
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: ExactAssetImage(
                 'assets/images/placeholder_bg.png',
@@ -189,7 +193,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
     );
   }
 
-  Widget _bodySecondDrawer(){
+  Widget _bodySecondDrawer() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -232,7 +236,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
             onPressed: () {},
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.orangeAccent,
               ),
             ),
@@ -241,7 +245,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
             children: <Widget>[
               FlatButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'SHARE',
                   style: TextStyle(
                     color: Colors.orangeAccent,
@@ -250,7 +254,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
               ),
               FlatButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'OPEN',
                   style: TextStyle(
                     color: Colors.orangeAccent,
@@ -265,6 +269,4 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
   }
 }
 
-FlatButton({required Null Function() onPressed, required Text child}) {
-}
-
+FlatButton({required Null Function() onPressed, required Text child}) {}

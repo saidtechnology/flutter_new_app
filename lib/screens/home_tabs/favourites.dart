@@ -6,6 +6,8 @@ import 'package:news_app/screens/single_post.dart';
 import 'package:news_app/utilities/data_utilities.dart';
 
 class Favourites extends StatefulWidget {
+  const Favourites({super.key});
+
   @override
   _FavouritesState createState() => _FavouritesState();
 }
@@ -55,20 +57,23 @@ class _FavouritesState extends State<Favourites> {
           return ListView.builder(
             itemBuilder: (context, position) {
               return GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context){
-                      return SinglePost(posts[position]);
-                    },
-                  ),);
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return SinglePost(posts[position]);
+                      },
+                    ),
+                  );
                 },
                 child: Card(
                   child: Container(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       children: <Widget>[
                         _authorRow(position, posts[position]),
-                        SizedBox(
+                        const SizedBox(
                           height: 16,
                         ),
                         _newsItemRow(posts[position]),
@@ -98,30 +103,30 @@ class _FavouritesState extends State<Favourites> {
               ),
               width: 50,
               height: 50,
-              margin: EdgeInsets.only(right: 16),
+              margin: const EdgeInsets.only(right: 16),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
+                const Text(
                   'Michael Adams',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
                 Row(
                   children: <Widget>[
                     Text(
                       parseHumanDateTime(post.dateWritten),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.grey,
                       ),
                     ),
                     Text(
-                      ' User Id : ' + post.id,
+                      ' User Id : ${post.id}',
                       style: TextStyle(
                         color: _getRandomColor(),
                       ),
@@ -134,8 +139,8 @@ class _FavouritesState extends State<Favourites> {
         ),
         IconButton(
           icon: (ids.contains(position))
-              ? Icon(Icons.bookmark)
-              : Icon(Icons.bookmark_border),
+              ? const Icon(Icons.bookmark)
+              : const Icon(Icons.bookmark_border),
           color: (ids.contains(position)) ? Colors.red : Colors.grey,
           onPressed: () {
             setState(() {
@@ -161,7 +166,7 @@ class _FavouritesState extends State<Favourites> {
           ),
           width: 124,
           height: 124,
-          margin: EdgeInsets.only(right: 16),
+          margin: const EdgeInsets.only(right: 16),
         ),
         Expanded(
           child: Column(
@@ -169,7 +174,7 @@ class _FavouritesState extends State<Favourites> {
               Text(
                 post.title,
                 maxLines: 2,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                 ),
@@ -177,7 +182,7 @@ class _FavouritesState extends State<Favourites> {
               Text(
                 post.content,
                 maxLines: 4,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
                   height: 1.25,

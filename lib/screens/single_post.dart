@@ -7,7 +7,7 @@ import 'package:news_app/models/post.dart';
 class SinglePost extends StatefulWidget {
   final Post post;
 
-  const SinglePost(this.post);
+  const SinglePost(this.post, {super.key});
 
   @override
   _SinglePostState createState() => _SinglePostState();
@@ -67,14 +67,12 @@ class _SinglePostState extends State<SinglePost> {
   Widget _drawPostDetails() {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Container(
-        child: Text(
-          widget.post.content,
-          style: TextStyle(
-            fontSize: 18,
-            letterSpacing: 1.2,
-            height: 1.25,
-          ),
+      child: Text(
+        widget.post.content,
+        style: const TextStyle(
+          fontSize: 18,
+          letterSpacing: 1.2,
+          height: 1.25,
         ),
       ),
     );
@@ -90,10 +88,10 @@ class _SinglePostState extends State<SinglePost> {
               CircleAvatar(
                 backgroundImage: NetworkImage(widget.post.featuredImage),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 16,
               ),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Christina"),
@@ -102,10 +100,10 @@ class _SinglePostState extends State<SinglePost> {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
-          Text(
+          const Text(
               "Weasel the jeeper goodness inconsiderately spelled so ubiquitous amused knitted and altruistic amiable..."),
         ],
       ),
@@ -114,14 +112,14 @@ class _SinglePostState extends State<SinglePost> {
 
   Widget _commentTextEntry() {
     return Container(
-      color: Color.fromRGBO(241, 245, 247, 1),
+      color: const Color.fromRGBO(241, 245, 247, 1),
       child: Column(
         children: <Widget>[
           Row(
             children: <Widget>[
-              Flexible(
+              const Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16, bottom: 16),
+                  padding: EdgeInsets.only(left: 16, bottom: 16),
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
@@ -136,7 +134,7 @@ class _SinglePostState extends State<SinglePost> {
                 ),
               ),
               FlatButton(
-                child: Text(
+                child: const Text(
                   'SEND',
                   style: TextStyle(
                     color: Colors.red,
@@ -146,7 +144,7 @@ class _SinglePostState extends State<SinglePost> {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           )
         ],
@@ -155,5 +153,4 @@ class _SinglePostState extends State<SinglePost> {
   }
 }
 
-FlatButton({required Null Function() onPressed, required Text child}) {
-}
+FlatButton({required Null Function() onPressed, required Text child}) {}

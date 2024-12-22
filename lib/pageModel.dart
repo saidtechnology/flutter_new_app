@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PageModel {
-  String _title;
-  String _description;
-  String _image;
-  IconData _icon;
-
+  final String _title;
+  final String _description;
+  final String _image;
+  final IconData _icon;
 
   PageModel(this._title, this._description, this._image, this._icon);
 
@@ -17,8 +16,4 @@ class PageModel {
   String get description => _description;
 
   String get title => _title;
-
-
-
-
 }

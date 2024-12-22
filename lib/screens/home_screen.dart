@@ -10,6 +10,8 @@ import 'home_tabs/popular.dart';
 import 'home_tabs/favourites.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -45,18 +47,18 @@ class _HomeScreenState extends State<HomeScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Explore'),
+        title: const Text('Explore'),
         centerTitle: false,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
           _popOutMenu(context),
         ],
         bottom: TabBar(
           indicatorColor: Colors.white,
-          tabs: <Widget>[
+          tabs: const <Widget>[
             Tab(
               text: "WHAT'S NEW",
             ),
@@ -64,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen>
               text: "POPULAR",
             ),
             Tab(
-              text: "FAVOURITES",
+              text: "FAVORITES",
             ),
           ],
           controller: _tabController,
@@ -73,12 +75,12 @@ class _HomeScreenState extends State<HomeScreen>
       drawer: NavigationDrawer.NavigationDrawer(),
       body: Center(
         child: TabBarView(
-          children: <Widget>[
+          controller: _tabController,
+          children: const <Widget>[
             WhatsNew(),
             Popular(),
             Favourites(),
           ],
-          controller: _tabController,
         ),
       ),
     );
@@ -86,22 +88,22 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _popOutMenu(BuildContext context) {
     return PopupMenuButton<PopOutMenu>(
-      icon: Icon(Icons.more_vert),
+      icon: const Icon(Icons.more_vert),
       itemBuilder: (context) {
         return [
-          PopupMenuItem<PopOutMenu>(
+          const PopupMenuItem<PopOutMenu>(
             value: PopOutMenu.ABOUT,
             child: Text('ABOUT'),
           ),
-          PopupMenuItem<PopOutMenu>(
+          const PopupMenuItem<PopOutMenu>(
             value: PopOutMenu.HELP,
             child: Text('HELP'),
           ),
-          PopupMenuItem<PopOutMenu>(
+          const PopupMenuItem<PopOutMenu>(
             value: PopOutMenu.CONTACT,
             child: Text('CONTACT'),
           ),
-          PopupMenuItem<PopOutMenu>(
+          const PopupMenuItem<PopOutMenu>(
             value: PopOutMenu.SETTINGS,
             child: Text('SETTINGS'),
           ),

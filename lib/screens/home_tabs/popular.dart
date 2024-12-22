@@ -5,6 +5,8 @@ import 'package:news_app/screens/single_post.dart';
 import 'package:news_app/utilities/data_utilities.dart';
 
 class Popular extends StatefulWidget {
+  const Popular({super.key});
+
   @override
   _PopularState createState() => _PopularState();
 }
@@ -66,14 +68,14 @@ class _PopularState extends State<Popular> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(
+              width: 124,
+              height: 124,
               child: Image(
                 image: NetworkImage(post.featuredImage),
                 fit: BoxFit.cover,
               ),
-              width: 124,
-              height: 124,
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Expanded(
@@ -82,18 +84,19 @@ class _PopularState extends State<Popular> {
                   Text(
                     post.title,
                     maxLines: 2,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Michael Adams'),
+                      const Text('Michael Adams'),
                       Row(
                         children: <Widget>[
-                          Icon(Icons.timer),
+                          const Icon(Icons.timer),
                           Text(parseHumanDateTime(post.dateWritten)),
                         ],
                       ),
@@ -107,6 +110,4 @@ class _PopularState extends State<Popular> {
       ),
     );
   }
-
-
 }

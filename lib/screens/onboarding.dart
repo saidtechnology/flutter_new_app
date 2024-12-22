@@ -5,7 +5,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'home_screen.dart';
 
 class OnBoarding extends StatefulWidget {
-  OnBoarding({Key? key}) : super(key: key);
+  const OnBoarding({super.key});
 
   @override
   State<OnBoarding> createState() => _OnBoardingState();
@@ -70,7 +70,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     ),
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -96,7 +96,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         ),
                         Text(
                           pages[index].title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -110,7 +110,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           ),
                           child: Text(
                             pages[index].description,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                             ),
@@ -136,7 +136,7 @@ class _OnBoardingState extends State<OnBoarding> {
             bottom: 0,
             child: Container(
               padding: const EdgeInsets.all(24.0),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -152,7 +152,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   SmoothPageIndicator(
                     controller: _pageController,
                     count: pages.length,
-                    effect: WormEffect(
+                    effect: const WormEffect(
                       dotColor: Colors.grey,
                       activeDotColor: Colors.white,
                       dotHeight: 10,
@@ -166,7 +166,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         _updateSeen();
                       } else {
                         _pageController.nextPage(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeIn,
                         );
                       }
@@ -180,7 +180,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     ),
                     child: Text(
                       _currentPage == pages.length - 1 ? 'GET STARTED' : 'NEXT',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

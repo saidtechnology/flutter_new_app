@@ -18,7 +18,7 @@ class AppTheme {
       onSurface: Colors.black,
       brightness: Brightness.light,
     ),
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       elevation: 0,
       backgroundColor: primaryColor,
       foregroundColor: Colors.white,

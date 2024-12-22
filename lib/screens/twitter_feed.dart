@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/shared_ui/navigation_drawer.dart'as NavigationDrawer;
+import 'package:news_app/shared_ui/navigation_drawer.dart' as NavigationDrawer;
 
 class TwitterFeed extends StatefulWidget {
+  const TwitterFeed({super.key});
+
   @override
   _TwitterFeedState createState() => _TwitterFeedState();
 }
@@ -11,11 +13,11 @@ class _TwitterFeedState extends State<TwitterFeed> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Twitter Feed'),
+        title: const Text('Twitter Feed'),
         centerTitle: false,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           )
         ],
@@ -42,12 +44,16 @@ class _TwitterFeedState extends State<TwitterFeed> {
   }
 
   Widget _cardHeader() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, top: 16, right: 16,),
+    return const Padding(
+      padding: EdgeInsets.only(
+        left: 16,
+        top: 16,
+        right: 16,
+      ),
       child: Row(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: EdgeInsets.only(right: 8),
             child: CircleAvatar(
               backgroundColor: Colors.purple,
             ),
@@ -73,7 +79,7 @@ class _TwitterFeedState extends State<TwitterFeed> {
                 children: <Widget>[
                   Text('Fri 12 May 2017 '),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
+                    padding: EdgeInsets.only(bottom: 8),
                     child: Text(
                       '.',
                       style: TextStyle(
@@ -92,12 +98,12 @@ class _TwitterFeedState extends State<TwitterFeed> {
   }
 
   Widget _cardBody() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16),
+    return const Padding(
+      padding: EdgeInsets.only(left: 16, right: 16),
       child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(
+            padding: EdgeInsets.only(
               top: 16,
               bottom: 25,
             ),
@@ -129,11 +135,15 @@ class _TwitterFeedState extends State<TwitterFeed> {
               Row(
                 children: <Widget>[
                   IconButton(
-                    icon: Icon(Icons.repeat , size: 35, color: Colors.orange,),
+                    icon: const Icon(
+                      Icons.repeat,
+                      size: 35,
+                      color: Colors.orange,
+                    ),
                     onPressed: () {},
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 5),
                     child: Text(
                       '25',
                       style: TextStyle(color: Colors.grey),
@@ -141,20 +151,25 @@ class _TwitterFeedState extends State<TwitterFeed> {
                   ),
                 ],
               ),
-
               Row(
                 children: <Widget>[
                   FlatButton(
                     onPressed: () {},
-                    child: Text('SHARE' , style: TextStyle(
-                      color: Colors.orange,
-                    ),),
+                    child: const Text(
+                      'SHARE',
+                      style: TextStyle(
+                        color: Colors.orange,
+                      ),
+                    ),
                   ),
                   FlatButton(
                     onPressed: () {},
-                    child: Text('OPEN', style: TextStyle(
-                      color: Colors.orange,
-                    ),),
+                    child: const Text(
+                      'OPEN',
+                      style: TextStyle(
+                        color: Colors.orange,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -165,5 +180,5 @@ class _TwitterFeedState extends State<TwitterFeed> {
     );
   }
 }
-FlatButton({required Null Function() onPressed, required Text child}) {
-}
+
+FlatButton({required Null Function() onPressed, required Text child}) {}

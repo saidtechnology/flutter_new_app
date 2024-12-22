@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import '../shared_ui/navigation_drawer.dart' as NavigationDrawer;
 
 class InstagramFeeds extends StatefulWidget {
+  const InstagramFeeds({super.key});
+
   @override
   _InstagramFeedsState createState() => _InstagramFeedsState();
 }
 
 class _InstagramFeedsState extends State<InstagramFeeds> {
-  late List <int> ids ;
+  late List<int> ids;
 
   @override
   void initState() {
@@ -19,10 +21,10 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Instagram Feeds'),
+        title: const Text('Instagram Feeds'),
         centerTitle: false,
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
         ],
       ),
       drawer: NavigationDrawer.NavigationDrawer(),
@@ -58,8 +60,8 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
         children: <Widget>[
           Row(
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 10, bottom: 7),
+              const Padding(
+                padding: EdgeInsets.only(right: 10, bottom: 7),
                 child: CircleAvatar(
                   backgroundColor: Colors.deepOrange,
                   radius: 24,
@@ -75,7 +77,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
                         fontSize: 16,
                         color: Colors.grey.shade800),
                   ),
-                  Row(
+                  const Row(
                     children: <Widget>[
                       Text(
                         'Fri, 12 May 2017 ',
@@ -84,7 +86,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
+                        padding: EdgeInsets.only(bottom: 8),
                         child: Text(
                           '. ',
                           style: TextStyle(fontSize: 18, color: Colors.grey),
@@ -105,18 +107,18 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
           Row(
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.favorite), 
-                onPressed: (){
-                  if(ids.contains(position)){
+                icon: const Icon(Icons.favorite),
+                onPressed: () {
+                  if (ids.contains(position)) {
                     ids.remove(position);
-                  }else{
+                  } else {
                     ids.add(position);
                   }
-                  setState(() {
-
-                  });
+                  setState(() {});
                 },
-                color:(ids.contains(position))? Colors.red : Colors.grey.shade400,
+                color: (ids.contains(position))
+                    ? Colors.red
+                    : Colors.grey.shade400,
               ),
               Text(
                 '25',
@@ -126,7 +128,6 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
               ),
             ],
           )
-
         ],
       ),
     );
@@ -147,8 +148,8 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
+        const Padding(
+          padding: EdgeInsets.only(
             left: 16,
             right: 16,
             bottom: 16,
@@ -162,7 +163,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
           ),
         ),
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: ExactAssetImage(
                 'assets/images/placeholder_bg.png',
@@ -188,7 +189,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
         children: <Widget>[
           FlatButton(
             onPressed: () {},
-            child: Text(
+            child: const Text(
               '10 COMMENTS',
               style: TextStyle(
                 color: Colors.orangeAccent,
@@ -199,7 +200,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
             children: <Widget>[
               FlatButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'SHARE',
                   style: TextStyle(
                     color: Colors.orangeAccent,
@@ -208,7 +209,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
               ),
               FlatButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'OPEN',
                   style: TextStyle(
                     color: Colors.orangeAccent,
@@ -222,5 +223,5 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
     );
   }
 }
-FlatButton({required Null Function() onPressed, required Text child}) {
-}
+
+FlatButton({required Null Function() onPressed, required Text child}) {}

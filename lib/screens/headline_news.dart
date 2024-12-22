@@ -4,13 +4,15 @@ import 'home_tabs/favourites.dart';
 import 'home_tabs/popular.dart';
 
 class HeadLineNews extends StatefulWidget {
+  const HeadLineNews({super.key});
+
   @override
   _HeadLineNewsState createState() => _HeadLineNewsState();
 }
 
-class _HeadLineNewsState extends State<HeadLineNews> with SingleTickerProviderStateMixin {
+class _HeadLineNewsState extends State<HeadLineNews>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
-
 
   @override
   void initState() {
@@ -23,28 +25,33 @@ class _HeadLineNewsState extends State<HeadLineNews> with SingleTickerProviderSt
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Headline News'),
+        title: const Text('Headline News'),
         centerTitle: false,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             onPressed: () {},
           ),
         ],
         bottom: TabBar(
           indicatorColor: Colors.white,
-          tabs: <Widget>[
-            Tab(text: "WHAT'S NEW",),
+          tabs: const <Widget>[
+            Tab(
+              text: "WHAT'S NEW",
+            ),
             Tab(text: "POPULAR"),
-            Tab(text: "FAVOURITES",),
+            Tab(
+              text: "FAVOURITES",
+            ),
           ],
           controller: _tabController,
         ),
@@ -52,12 +59,12 @@ class _HeadLineNewsState extends State<HeadLineNews> with SingleTickerProviderSt
       drawer: NavigationDrawer.NavigationDrawer(),
       body: Center(
         child: TabBarView(
-          children: <Widget>[
+          controller: _tabController,
+          children: const <Widget>[
             Favourites(),
             Popular(),
             Favourites(),
           ],
-          controller: _tabController,
         ),
       ),
     );

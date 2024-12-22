@@ -7,10 +7,10 @@ import 'utilities/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final prefs = await SharedPreferences.getInstance();
   final bool seen = prefs.getBool('seen') ?? false;
-  
+
   runApp(MyApp(initialScreen: seen ? HomeScreen() : OnBoarding()));
 }
 
@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
   final Widget initialScreen;
 
   const MyApp({
-    Key? key,
+    super.key,
     required this.initialScreen,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

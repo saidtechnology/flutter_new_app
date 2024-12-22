@@ -7,6 +7,8 @@ import 'package:news_app/screens/facebook_feed.dart';
 import 'package:news_app/screens/instagram_feed.dart';
 
 class NavigationDrawer extends StatefulWidget {
+  const NavigationDrawer({super.key});
+
   @override
   _NavigationDrawerState createState() => _NavigationDrawerState();
 }
@@ -15,23 +17,23 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   List<NavMenuItem> navigationMenu = [
     NavMenuItem(
       "Explore",
-      () => HomeScreen(),
+      () => const HomeScreen(),
     ),
     NavMenuItem(
       "Headline News",
-      () => HeadLineNews(),
+      () => const HeadLineNews(),
     ),
     NavMenuItem(
       "Twitter Feeds",
-      () => TwitterFeed(),
+      () => const TwitterFeed(),
     ),
     NavMenuItem(
       'Facebook Feeds',
-      () => FacebookFeeds(),
+      () => const FacebookFeeds(),
     ),
     NavMenuItem(
       'Instagram Feeds',
-      () => InstagramFeeds(),
+      () => const InstagramFeeds(),
     ),
   ];
 
@@ -39,7 +41,7 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Padding(
-        padding: EdgeInsets.only(top: 75, left: 24),
+        padding: const EdgeInsets.only(top: 75, left: 24),
         child: ListView.builder(
           itemBuilder: (context, position) {
             return Padding(

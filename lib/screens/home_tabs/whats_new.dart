@@ -6,6 +6,8 @@ import 'package:news_app/screens/single_post.dart';
 import 'package:news_app/utilities/data_utilities.dart';
 
 class WhatsNew extends StatefulWidget {
+  const WhatsNew({super.key});
+
   @override
   _WhatsNewState createState() => _WhatsNewState();
 }
@@ -87,7 +89,7 @@ class _WhatsNewState extends State<WhatsNew> {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Padding(
@@ -122,7 +124,7 @@ class _WhatsNewState extends State<WhatsNew> {
             child: _drawSectionTitle('Top Stories'),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Card(
               child: FutureBuilder(
                 future: postsAPI.fetchPostsByCategoryId("2"),
@@ -203,14 +205,14 @@ class _WhatsNewState extends State<WhatsNew> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(
+              width: 124,
+              height: 124,
               child: Image.network(
                 post.featuredImage,
                 fit: BoxFit.cover,
               ),
-              width: 124,
-              height: 124,
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
             Expanded(
@@ -219,18 +221,19 @@ class _WhatsNewState extends State<WhatsNew> {
                   Text(
                     post.title,
                     maxLines: 2,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 18,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Michael Adams'),
+                      const Text('Michael Adams'),
                       Row(
                         children: <Widget>[
-                          Icon(Icons.timer),
+                          const Icon(Icons.timer),
                           Text(parseHumanDateTime(post.dateWritten)),
                         ],
                       ),
@@ -256,7 +259,7 @@ class _WhatsNewState extends State<WhatsNew> {
   /// Group 3 : Draw Recent Updates.
   Widget _drawRecentUpdates() {
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: FutureBuilder(
         future: postsAPI.fetchPostsByCategoryId("3"),
         builder: (context, AsyncSnapshot snapShot) {
@@ -290,7 +293,7 @@ class _WhatsNewState extends State<WhatsNew> {
               ),
               _drawRecentUpdatesCard(Colors.deepOrange, post1),
               _drawRecentUpdatesCard(Colors.teal, post2),
-              SizedBox(
+              const SizedBox(
                 height: 48,
               ),
             ],
@@ -331,13 +334,13 @@ class _WhatsNewState extends State<WhatsNew> {
             Padding(
               padding: const EdgeInsets.only(top: 16, left: 16),
               child: Container(
-                padding:
-                    EdgeInsets.only(left: 24, right: 24, top: 2, bottom: 2),
+                padding: const EdgeInsets.only(
+                    left: 24, right: 24, top: 2, bottom: 2),
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: Text(
+                child: const Text(
                   'SPORT',
                   style: TextStyle(
                     color: Colors.white,
@@ -347,27 +350,30 @@ class _WhatsNewState extends State<WhatsNew> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 8),
+              padding: const EdgeInsets.only(
+                  left: 16, right: 16, top: 16, bottom: 8),
               child: Text(
                 post.title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 16),
+              padding: const EdgeInsets.only(
+                  left: 16, right: 16, top: 8, bottom: 16),
               child: Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     Icons.timer,
                     color: Colors.grey,
                     size: 18,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 4,
                   ),
                   Text(
                     parseHumanDateTime(post.dateWritten),
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
+                    style: const TextStyle(color: Colors.grey, fontSize: 14),
                   ),
                 ],
               ),

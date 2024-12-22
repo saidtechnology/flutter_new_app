@@ -3,8 +3,8 @@ import 'package:timeago/timeago.dart' as timeago;
 
 Widget loading() {
   return Container(
-    padding: EdgeInsets.only(top: 16, bottom: 16),
-    child: Center(
+    padding: const EdgeInsets.only(top: 16, bottom: 16),
+    child: const Center(
       child: CircularProgressIndicator(),
     ),
   );
@@ -12,22 +12,22 @@ Widget loading() {
 
 Widget connectionError() {
   return Container(
-    padding: EdgeInsets.all(16),
-    child: Text('Connection Error !!!!'),
+    padding: const EdgeInsets.all(16),
+    child: const Text('Connection Error !!!!'),
   );
 }
 
 Widget error(var error) {
   return Container(
-    padding: EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
     child: Text(error.toString()),
   );
 }
 
 Widget noData() {
   return Container(
-    padding: EdgeInsets.all(16),
-    child: Text('No Data Available!'),
+    padding: const EdgeInsets.all(16),
+    child: const Text('No Data Available!'),
   );
 }
 
@@ -37,9 +37,9 @@ String parseHumanDateTime(String dateTime) {
   return timeago.format(theDifference);
 }
 
-TextStyle headerTitle = TextStyle(
+TextStyle headerTitle = const TextStyle(
     color: Colors.white, fontSize: 22, fontWeight: FontWeight.w600);
-TextStyle headerDescription = TextStyle(
+TextStyle headerDescription = const TextStyle(
   color: Colors.white,
   fontSize: 18,
 );
