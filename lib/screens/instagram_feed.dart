@@ -27,7 +27,7 @@ class _InstagramFeedsState extends State<InstagramFeeds> {
           IconButton(icon: const Icon(Icons.search), onPressed: () {}),
         ],
       ),
-      drawer: NavigationDrawer.NavigationDrawer(),
+      drawer: const NavigationDrawer.NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
           return Padding(

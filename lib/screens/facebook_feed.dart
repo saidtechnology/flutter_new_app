@@ -32,7 +32,7 @@ class _FacebookFeedsState extends State<FacebookFeeds> {
           )
         ],
       ),
-      drawer: NavigationDrawer.NavigationDrawer(),
+      drawer: const NavigationDrawer.NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
           return Column(

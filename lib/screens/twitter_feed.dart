@@ -22,7 +22,7 @@ class _TwitterFeedState extends State<TwitterFeed> {
           )
         ],
       ),
-      drawer: NavigationDrawer.NavigationDrawer(),
+      drawer: const NavigationDrawer.NavigationDrawer(),
       body: ListView.builder(
         itemBuilder: (context, position) {
           return Padding(

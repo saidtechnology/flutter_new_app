@@ -56,7 +56,7 @@ class _HeadLineNewsState extends State<HeadLineNews>
           controller: _tabController,
         ),
       ),
-      drawer: NavigationDrawer.NavigationDrawer(),
+      drawer: const NavigationDrawer.NavigationDrawer(),
       body: Center(
         child: TabBarView(
           controller: _tabController,

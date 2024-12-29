@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen>
           controller: _tabController,
         ),
       ),
-      drawer: NavigationDrawer.NavigationDrawer(),
+      drawer: const NavigationDrawer.NavigationDrawer(),
       body: Center(
         child: TabBarView(
           controller: _tabController,
@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen>
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return AboutUs();
+                  return const AboutUs();
                 },
               ),
             );
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen>
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return ContactUs();
+                  return const ContactUs();
                 },
               ),
             );
@@ -136,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen>
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return Settings();
+                  return const Settings();
                 },
               ),
             );
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen>
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return Help();
+                  return const Help();
                 },
               ),
             );
