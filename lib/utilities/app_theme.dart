@@ -24,12 +24,12 @@ class AppTheme {
       foregroundColor: Colors.white,
       centerTitle: true,
     ),
-    cardTheme: CardTheme(
+    cardTheme: const CardTheme(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.all(Radius.circular(12))
+        ),
       ),
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 2,
@@ -67,12 +67,12 @@ class AppTheme {
       foregroundColor: Colors.white,
       centerTitle: true,
     ),
-    cardTheme: CardTheme(
+    cardTheme: const CardTheme(
       elevation: 2,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.all(Radius.circular(12))
+        ),
       ),
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         elevation: 2,
